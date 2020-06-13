@@ -289,68 +289,68 @@ class DCGAN:
                     logging.info("BEST_PSPECT saved at %d, chi=%f"%(iternum, chisq_pspect))
 
 
-#     def set_transf_funcs(self):
-#         def transform(x):
-#             return np.divide(2.*x, x + self.datascale) - 1.
-#         def invtransform(s):
-#             return self.datascale*np.divide(1. + s, 1. - s)
-#         self.transform = transform
-#         self.invtransform = invtransform
-
-#     def set_transf_funcs_tensor(self):
-#         def transform(x):
-#             return 2.*x/(x + self.datascale) - 1.
-#         def invtransform(s):
-#             return self.datascale*(1. + s)/(1. - s)
-#         self.transform_tensor = transform
-#         self.invtransform_tensor = invtransform
-
-### Testing out new modified normalization: log + linear
     def set_transf_funcs(self):
-        
-        def f_transform(x):
-            if x<=50:
-                a=0.03; b=-1.0
-                return a*x+b
-            elif x>50: 
-                a=0.5/np.log(300)
-                b=0.5-a*np.log(50)
-                return a*np.log(x)+b
-        
-        def f_invtransform(y):
-            if y<=0.5:
-                a=0.03;b=-1.0
-                return (y-b)/a
-            elif y>0.5: 
-                a=0.5/np.log(300)
-                b=0.5-a*np.log(50)
-                return np.exp((y-b)/a)  
-    
-        self.transform = np.vectorize(f_transform)
-        self.invtransform = np.vectorize(f_invtransform)
+        def transform(x):
+            return np.divide(2.*x, x + self.datascale) - 1.
+        def invtransform(s):
+            return self.datascale*np.divide(1. + s, 1. - s)
+        self.transform = transform
+        self.invtransform = invtransform
 
     def set_transf_funcs_tensor(self):
+        def transform(x):
+            return 2.*x/(x + self.datascale) - 1.
+        def invtransform(s):
+            return self.datascale*(1. + s)/(1. - s)
+        self.transform_tensor = transform
+        self.invtransform_tensor = invtransform
 
-        def f_transform(x):
-            if x<=50:
-                a=0.03; b=-1.0
-                return a*x+b
-            elif x>50: 
-                a=0.5/np.log(300)
-                b=0.5-a*np.log(50)
-                return a*np.log(x)+b
+# ### Testing out new modified normalization: log + linear
+#     def set_transf_funcs(self):
         
-        def f_invtransform(y):
-            if y<=0.5:
-                a=0.03;b=-1.0
-                return (y-b)/a
-            elif y>0.5: 
-                a=0.5/np.log(300)
-                b=0.5-a*np.log(50)
-                return np.exp((y-b)/a)
+#         def f_transform(x):
+#             if x<=50:
+#                 a=0.03; b=-1.0
+#                 return a*x+b
+#             elif x>50: 
+#                 a=0.5/np.log(300)
+#                 b=0.5-a*np.log(50)
+#                 return a*np.log(x)+b
         
-        self.transform_tensor = np.vectorize(f_transform)
-        self.invtransform_tensor = np.vectorize(f_invtransform)
+#         def f_invtransform(y):
+#             if y<=0.5:
+#                 a=0.03;b=-1.0
+#                 return (y-b)/a
+#             elif y>0.5: 
+#                 a=0.5/np.log(300)
+#                 b=0.5-a*np.log(50)
+#                 return np.exp((y-b)/a)  
+    
+#         self.transform = np.vectorize(f_transform)
+#         self.invtransform = np.vectorize(f_invtransform)
+    
+#     def set_transf_funcs_tensor(self):
+
+#         def f_transform(x):
+#             if x<=50:
+#                 a=0.03; b=-1.0
+#                 return a*x+b
+#             elif x>50: 
+#                 a=0.5/K.log(300)
+#                 b=0.5-a*K.log(50)
+#                 return a*K.log(x)+b
+        
+#         def f_invtransform(y):
+#             if y<=0.5:
+#                 a=0.03;b=-1.0
+#                 return K.eval((y-b)/a)
+#             elif y>0.5: 
+#                 a=0.5/K.log(300)
+#                 b=0.5-a*K.log(50)
+#                 return K.eval(K.exp((y-b)/a))
+        
+#         self.transform_tensor = K.eval(f_transform)
+#         self.invtransform_tensor = K.eval(f_invtransform)
         
         
         

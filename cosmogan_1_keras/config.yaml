@@ -1,11 +1,8 @@
 base: &BASE
 
-#     dataname: '/global/cfs/cdirs/m3363/vayyar/cosmogan_data/raw_data/' # base name of training/validation data
-#     train_file: 'very_large_dataset_train.npy'
-#     val_file: 'very_large_dataset_val.npy'
-    dataname: '/global/cfs/cdirs/m3363/vayyar/cosmogan_data/raw_data/peter_dataset/' # base name of training/validation data
-    train_file: 'raw_train.npy'
-    val_file: 'raw_val.npy'
+    dataname: '/global/cfs/cdirs/m3363/vayyar/cosmogan_data/raw_data/dataset_2_smooothing_200k/' # base name of training and validation data
+    train_file: 'train.npy'
+    val_file: 'val.npy'
     img_dim: 128 # image dimension
     noise_vect_len: 64 # length of generator noise vector
     nlayers: 4 # number of conv+batchnorm layers
